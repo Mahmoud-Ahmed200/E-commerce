@@ -1,6 +1,6 @@
-
-
 # 🛍️ Modern Tech E-Commerce Platform
+
+**Team Members:** Ziad Wael, Mahmoud Ahmed, Anas Mahmoud, Badr Rafik
 
 A modern **e-commerce platform for tech products**, with React, Node.js, and Express. It delivers a **fun shopping experience** through **loyalty points, gamified discounts, and exclusive coupons**.
 
@@ -23,4 +23,3 @@ A modern **e-commerce platform for tech products**, with React, Node.js, and Exp
 * **Backend:** Node.js + Express
 
 ---
-
