@@ -4,7 +4,7 @@
 
 **Team Members**
 
-- Ziad Wael
+- Ziad Wael (Leader)
 - Mahmoud Ahmed
 - Anas Mahmoud
 - Badr Rafik
