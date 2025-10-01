@@ -1,0 +1,6 @@
+I have done the token verification logic, need to revise on the algorithms i used
+need to see if there are any better ways for functions and there replacement
+move function to utility and these things
+enhance error handling 
+use node mailer with things i have done
+MAKE THE BEST VERSION OF THE CODE

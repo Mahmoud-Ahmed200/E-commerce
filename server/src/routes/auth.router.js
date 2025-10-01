@@ -1,0 +1,10 @@
+const express = require("express");
+const router = express.Router();
+const controller = require("../controllers/auth.controller");
+router.post("/signup", controller.signUp);
+router.post("/signin", controller.signIn);
+router.post("/signout", controller.signOut);
+router.post("/verifyemail", controller.validateEmail);
+router.post("/forgotpassword", controller.forgotPassword);
+router.post("/resetpassword", controller.resetPassword);
+module.exports = router;
