@@ -1,12 +1,11 @@
-const express = require("express");
-const PORT = 3000;
-const app = express();
-const authRouter = require("./src/routes/auth.router");
-app.use(express.json());
-const { connect } = require("./src/config/db");
-app.listen(PORT, () => {
-  connect();
-  console.log(`Server listening on port ${PORT}`);
-});
-app.use("/auth", authRouter);
-app.get("/", async (req, res) => {});
+const app = require("./app");
+const connect = require("./src/config/db");
+
+const PORT = process.env.PORT || 5000;
+
+// connect to DB, then start server
+connect().then(() => {
+  app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+  });
+})
