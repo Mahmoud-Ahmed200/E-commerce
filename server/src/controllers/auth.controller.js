@@ -1,5 +1,6 @@
 const users = require("../models/User.model");
 const tokenHandler = require("../utils.js/token");
+const emailService = require("../services/email.service");
 const signUp = async (req, res) => {
   try {
     const { email, username, password } = req.body;
@@ -13,12 +14,12 @@ const signUp = async (req, res) => {
     const user = await users.create({ email, username, password });
     const { plainToken, hashedToken, expiresAt } =
       tokenHandler.createCryptoToken();
-    // send plan token to email
-    console.log(plainToken);
+    const link = `http://localhost:3000/auth/verifyemail?token=${plainToken}`;
     user.verifyToken = hashedToken;
     user.verifyTokenExpires = expiresAt;
     await user.save();
     user.password = undefined;
+    // await emailService.sendVerificationEmail(user.email, user.username, link);
     return res.status(201).json({
       message: "User signed up successfully",
       user,
@@ -44,7 +45,7 @@ const signIn = async (req, res) => {
     }
     user.password = undefined;
     const token = tokenHandler.generateJwtToken(user);
-    res.cookie("token", token, { maxAge: 1000 * 60 * 60 * 24 });
+    res.cookie("token", token, { maxAge: 1000 * 60 * 60 * 24, httpOnly: true });
     return res.status(200).json({
       message: "user signed in successfully",
       user,
@@ -64,20 +65,27 @@ const signOut = async (req, res) => {
   }
 };
 const validateEmail = async (req, res) => {
-  const { token } = req.query;
-  const hashedToken = tokenHandler.generateHashedCryptoToken(token);
-  const user = await users.findOne({ verifyToken: hashedToken });
-  if (!user) {
-    return res.status(400).json({ message: "Invalid token" });
+  try {
+    const { token } = req.query;
+    const hashedToken = tokenHandler.generateHashedCryptoToken(token);
+    const user = await users.findOne({ verifyToken: hashedToken });
+    if (!user) {
+      return res.status(400).json({ message: "Invalid token" });
+    }
+    if (user.verifyTokenExpires < Date.now()) {
+      return res.status(401).json({ message: "Expired token" });
+    }
+    user.verifyToken = undefined;
+    user.verifyTokenExpires = undefined;
+    user.isVerified = true;
+    await user.save();
+    return res
+      .status(200)
+      .json({ message: "User verified successfully", user });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Internal server error" });
   }
-  if (user.verifyTokenExpires < Date.now()) {
-    return res.status(401).json({ message: "Expired token" });
-  }
-  user.verifyToken = undefined;
-  user.verifyTokenExpires = undefined;
-  user.isVerified = true;
-  await user.save();
-  return res.status(200).json({ message: "User verified successfully", user });
 };
 const forgotPassword = async (req, res) => {
   try {
@@ -88,9 +96,10 @@ const forgotPassword = async (req, res) => {
     }
     const { plainToken, hashedToken, expiresAt } =
       tokenHandler.createCryptoToken();
-    console.log(plainToken);
+    // const link = `http://localhost:3000/auth/resetpassword?token=${plainToken}`;
     user.passwordReset = hashedToken;
     user.passwordResetExpires = expiresAt;
+    await emailService.passwordResetEmail(user.email, user.username, link);
     await user.save();
     return res
       .status(200)
