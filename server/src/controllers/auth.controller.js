@@ -1,25 +1,26 @@
 const users = require("../models/User.model");
 const tokenHandler = require("../utils.js/token");
-const emailService = require("../services/email.service");
 const signUp = async (req, res) => {
   try {
-    const { email, username, password } = req.body;
-    if (!email || !username || !password) {
+    const { email, fullName, password } = req.body;
+    if (!email || !fullName || !password) {
       return res.status(400).json({ message: "Missing required fields" });
     }
     const userCheck = await users.findOne({ email });
     if (userCheck) {
       return res.status(409).json({ message: "User already registered" });
     }
-    const user = await users.create({ email, username, password });
+    const user = await users.create({ email, fullName, password });
     const { plainToken, hashedToken, expiresAt } =
       tokenHandler.createCryptoToken();
     const link = `http://localhost:3000/auth/verifyemail?token=${plainToken}`;
+    console.log(link); // for test only
     user.verifyToken = hashedToken;
     user.verifyTokenExpires = expiresAt;
     await user.save();
+    user.verifyToken = undefined;
     user.password = undefined;
-    // await emailService.sendVerificationEmail(user.email, user.username, link);
+    // await emailService.sendVerificationEmail(user.email, user.fullName, link);
     return res.status(201).json({
       message: "User signed up successfully",
       user,
@@ -43,8 +44,10 @@ const signIn = async (req, res) => {
     if (!checkPassword) {
       return res.status(400).json({ message: "Invalid email or password" });
     }
-    user.password = undefined;
-    const token = tokenHandler.generateJwtToken(user);
+    user.password = undefined; //
+    user.verifyToken = undefined; //
+    user.passwordReset = undefined; //
+    const token = tokenHandler.generateJwtToken({ id: user._id });
     res.cookie("token", token, { maxAge: 1000 * 60 * 60 * 24, httpOnly: true });
     return res.status(200).json({
       message: "user signed in successfully",
@@ -57,7 +60,12 @@ const signIn = async (req, res) => {
 };
 const signOut = async (req, res) => {
   try {
-    res.clearCookie("token");
+    if (!req.cookies.token) {
+      return res.status(200).json({ message: "No active session" });
+    }
+    res.clearCookie("token", {
+      httpOnly: true,
+    });
     return res.status(200).json({ message: "User signed out successfully" });
   } catch (error) {
     console.error("error while signing out", error);
@@ -96,11 +104,13 @@ const forgotPassword = async (req, res) => {
     }
     const { plainToken, hashedToken, expiresAt } =
       tokenHandler.createCryptoToken();
-    // const link = `http://localhost:3000/auth/resetpassword?token=${plainToken}`;
+    const link = `http://localhost:3000/auth/resetpassword?token=${plainToken}`;
+    console.log(link);
     user.passwordReset = hashedToken;
     user.passwordResetExpires = expiresAt;
-    await emailService.passwordResetEmail(user.email, user.username, link);
+    // await emailService.passwordResetEmail(user.email, user.fullName, link);
     await user.save();
+    user.passwordReset = undefined;
     return res
       .status(200)
       .json({ message: "Password reset link has been sent" });

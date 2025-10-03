@@ -1,4 +1,4 @@
-const welcomeEmailTemplate = (link, username) => {
+const welcomeEmailTemplate = (link, fullName) => {
   return `
  <!DOCTYPE html>
 <html>
@@ -51,7 +51,7 @@ const welcomeEmailTemplate = (link, username) => {
         <h1>Welcome to Smart Tech!</h1>
       </div>
       <div class="content">
-        <h2>Hello ${username}!</h2>
+        <h2>Hello ${fullName}!</h2>
         <p>Thank you for signing up. We're excited to have you on board.</p>
         <p>Get started by verifying your account:</p>
         <a href="${link}" class="button">Verify account</a>
@@ -65,7 +65,7 @@ const welcomeEmailTemplate = (link, username) => {
 </html>
 `;
 };
-const sendPasswordResetEmail = (link,username) => {
+const sendPasswordResetEmail = (link, fullName) => {
   return `
   <!DOCTYPE html>
 <html>
@@ -134,7 +134,7 @@ const sendPasswordResetEmail = (link,username) => {
       </div>
       <div class="content">
         <h2>Password Reset Request</h2>
-        <p>Hello ${username},</p>
+        <p>Hello ${fullName},</p>
         <p>
           We received a request to reset your password for your Smart Tech
           account.

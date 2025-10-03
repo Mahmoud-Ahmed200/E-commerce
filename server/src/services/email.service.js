@@ -19,15 +19,15 @@ class EmailService {
       console.error("Error while sending email:", error);
     }
   }
-  async sendVerificationEmail(to, username,link) {
+  async sendVerificationEmail(to, fullName, link) {
     const subject = "Email verification";
-    const html = templates.welcomeEmailTemplate(link,username);
+    const html = templates.welcomeEmailTemplate(link, fullName);
     return await this.sendEmail(to, subject, html);
   }
-  async passwordResetEmail(to,username,link){
-    const subject="Password Reset Request"
-    const html=templates.sendPasswordResetEmail(link,username)
-    return await this.sendEmail(to,subject,html)
+  async passwordResetEmail(to, fullName, link) {
+    const subject = "Password Reset Request";
+    const html = templates.sendPasswordResetEmail(link, fullName);
+    return await this.sendEmail(to, subject, html);
   }
   async verifyEmails() {
     try {

@@ -6,5 +6,5 @@ router.post("/signin", controller.signIn);
 router.post("/signout", controller.signOut);
 router.post("/verifyemail", controller.validateEmail);
 router.post("/forgotpassword", controller.forgotPassword);
-router.put("/resetpassword", controller.resetPassword);
+router.patch("/resetpassword", controller.resetPassword);
 module.exports = router;

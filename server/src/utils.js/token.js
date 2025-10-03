@@ -8,8 +8,8 @@ const generateCryptoToken = () => {
 const generateHashedCryptoToken = (token) => {
   return crypto.createHash("sha256").update(token).digest("hex");
 };
-const generateJwtToken = (user) => {
-  return jwt.sign({ user }, API_SECRET_KEY, {
+const generateJwtToken = ({id}) => {
+  return jwt.sign({id}, API_SECRET_KEY, {
     expiresIn: "1d",
   });
 };

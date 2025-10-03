@@ -11,14 +11,17 @@ const userSchema = new mongoose.Schema(
       trim: true,
       lowercase: true,
     },
-    username: {
+    fullName: {
       type: String,
       required: true,
-      unique: true,
       trim: true,
       minlength: 3,
-      maxlength: 20,
+      maxlength: 50,
     },
+    // personalPhoto:{
+    //   type:String,
+    //   required:false,
+    // },
     password: {
       type: String,
       required: true,
@@ -34,9 +37,14 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
-    verifyToken: String,
+    lastLogin: Date,
+    //Addresses (Optional for now)
+    //Cart
+    //wishlist
+    //orders
+    verifyToken: { type: String, select: false },
     verifyTokenExpires: Date,
-    passwordReset: String,
+    passwordReset: { type: String, select: false },
     passwordResetExpires: Date,
   },
   { timestamps: true }

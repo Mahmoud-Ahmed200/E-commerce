@@ -5,13 +5,15 @@ const app = express();
 // Middlewares
 app.use(express.json());
 app.use(cookieParser());
-const { isAuth,isVerified } = require("./src/middleware/auth.middleware");
+const { isAuth, isVerified } = require("./src/middleware/auth.middleware");
 // Routes
 const authRouter = require("./src/routes/auth.router");
+const userRouter = require("./src/routes/user.router");
 // End Points
 app.use("/auth", authRouter);
+app.use("/user", isAuth, userRouter);
 // Test
-app.get("/", isAuth,isVerified,async (req, res) => {
+app.get("/", isAuth, isVerified, async (req, res) => {
   return res.status(200).json({ message: "TEST" });
 });
 module.exports = app;
