@@ -9,9 +9,11 @@ const { isAuth, isVerified } = require("./src/middleware/auth.middleware");
 // Routes
 const authRouter = require("./src/routes/auth.router");
 const userRouter = require("./src/routes/user.router");
+const productRouter = require("./src/routes/product.router");
 // End Points
 app.use("/auth", authRouter);
 app.use("/user", isAuth, userRouter);
+app.use("/product", productRouter);
 // Test
 app.get("/", isAuth, isVerified, async (req, res) => {
   return res.status(200).json({ message: "TEST" });

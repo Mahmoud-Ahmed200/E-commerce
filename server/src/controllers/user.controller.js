@@ -48,8 +48,8 @@ const changePassword = async (req, res) => {
     if (!checkPassword) {
       return res.status(400).json({ message: "Password is incorrect" });
     }
-    const checkRepetedPassword = await userDb.comparePassword(newPassword);
-    if (checkRepetedPassword) {
+    const checkSamePassword = await userDb.comparePassword(newPassword);
+    if (checkSamePassword) {
       return res
         .status(400)
         .json({ message: "New password cannot be the same as old password" });

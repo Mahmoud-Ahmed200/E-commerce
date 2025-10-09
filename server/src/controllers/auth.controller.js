@@ -1,5 +1,5 @@
 const users = require("../models/User.model");
-const tokenHandler = require("../utils.js/token");
+const tokenHandler = require("../utils/token");
 const signUp = async (req, res) => {
   try {
     const { email, fullName, password } = req.body;
