@@ -1,4 +1,4 @@
-const users = require("../models/User.model");
+const users = require("../models/user.model");
 const tokenHandler = require("../utils/token");
 const signUp = async (req, res) => {
   try {

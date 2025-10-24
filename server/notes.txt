@@ -1,4 +1,5 @@
-- I have done the token verification logic, need to revise on the algorithms i used (almost)
-- Need to see if there are any better ways for functions and there replacement (almost)
 - Enhance error handling  
 - Middleware still need to set to the routes
+- Order route
+- Payement method with stripe
+- ai chatbot (optional)

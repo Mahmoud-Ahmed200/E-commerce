@@ -1,4 +1,0 @@
-structure
-token vs otp
-id on JWT only and decode every time
-do i have to make sure user not sign in while he already signed in and same for register
