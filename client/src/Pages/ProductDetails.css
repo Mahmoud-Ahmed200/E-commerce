@@ -1,0 +1,166 @@
+.product-details-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .product-details-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Gallery Styles */
+.product-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.main-image {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #eee;
+}
+
+.main-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.thumbnail-list {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding: 0.5rem 0;
+}
+
+.thumbnail {
+  width: 80px;
+  height: 80px;
+  border-radius: 4px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border-color 0.2s;
+}
+
+.thumbnail.active {
+  border-color: #751FFF;
+}
+
+.thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Product Info Styles */
+.product-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.product-title {
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.product-price {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #751FFF;
+}
+
+.product-description h2,
+.product-specs h2 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.product-specs ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.product-specs li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.product-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.stock-status {
+  font-size: 0.9rem;
+}
+
+.in-stock {
+  color: #2ecc71;
+}
+
+.out-of-stock {
+  color: #e74c3c;
+}
+
+.add-to-cart,
+.add-to-wishlist {
+  padding: 1rem;
+  border: none;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.add-to-cart {
+  background-color: #751FFF;
+  color: white;
+}
+
+.add-to-cart:hover {
+  background-color: #6015d1;
+}
+
+.add-to-cart:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.add-to-wishlist {
+  background-color: transparent;
+  border: 1px solid #751FFF;
+  color: #751FFF;
+}
+
+.add-to-wishlist:hover {
+  background-color: #f8f4ff;
+}
+
+@media (max-width: 767px) {
+  .product-details-container {
+    padding: 1rem;
+  }
+
+  .product-title {
+    font-size: 1.5rem;
+  }
+
+  .thumbnail {
+    width: 60px;
+    height: 60px;
+  }
+}

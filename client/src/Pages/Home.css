@@ -1,0 +1,155 @@
+/* Hero */
+.hero {
+  background-image: url("https://images.unsplash.com/photo-1510557880182-3d4d3c8b0f6b?q=80&w=2000&auto=format&fit=crop");
+  background-repeat: no-repeat;
+
+  border-radius: 0.5rem;
+  position: relative;
+  overflow: hidden;
+  min-height: 400px;
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.6);
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.categories {
+  opacity: 0.8;
+}
+.cta {
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cta span {
+  padding-bottom: 7px;
+  letter-spacing: 4px;
+  font-size: 15px;
+  font-weight: 600;
+  padding-right: 15px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+.cta span:hover {
+  transform: scale(0.9);
+  color: #751fff;
+}
+
+.cta svg {
+  transform: translateX(-8px);
+  transition: all 0.3s ease;
+}
+
+.cta:hover svg {
+  transform: translateX(0);
+}
+
+.cta:active svg {
+  transform: scale(0.9);
+}
+
+.hover-underline-animation {
+  position: relative;
+  color: black;
+  padding-bottom: 20px;
+}
+
+.hover-underline-animation:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #751fff;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.cta:hover .hover-underline-animation:after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* Product cards */
+.card-dark {
+  background: var(--card-bg);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #e6eef6;
+}
+.card-dark:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.price {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* Responsive styles */
+.hero {
+  min-height: 300px;
+}
+
+@media (min-width: 768px) {
+  .hero {
+    min-height: 400px;
+    background-size: cover;
+    background-position: center;
+  }
+}
+
+.card-img img {
+  max-width: 100%;
+  height: auto;
+  max-height: 200px;
+  object-fit: contain;
+}
+
+.categories li {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  .categories li {
+    font-size: 16px;
+  }
+}
+
+/* Carousel responsive height */
+.carousel-item img {
+  height: 400px;
+  object-fit: cover;
+  object-position: center 100%;
+}
+
+@media (min-width: 768px) {
+  .carousel-item img {
+    height: calc(100vh - 120px);
+  }
+}
+
+/* CTA button responsive */
+.cta span {
+  font-size: 13px;
+}
+
+@media (min-width: 768px) {
+  .cta span {
+    font-size: 15px;
+  }
+}

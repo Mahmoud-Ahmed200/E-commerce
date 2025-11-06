@@ -1,0 +1,27 @@
+hr {
+  border: 0;
+  border-top: 1px solid #e0e0e0; 
+  opacity: 1;
+} 
+
+.navbar-brand {
+  letter-spacing: 1px;
+}
+
+/* Cart */
+.cart {
+  background-color: #E8E8E8;
+}
+
+.cart .col-lg-8 .border-bottom {
+  border-bottom: none !important;
+}
+
+.btn-checkout {
+  background-color: #751FFE !important;
+  border-radius: 20px !important;
+}
+
+.btn-checkout:hover {
+  background-color: #750fbe !important;
+}

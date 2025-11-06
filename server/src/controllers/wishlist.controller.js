@@ -1,12 +1,15 @@
 const wishlistModel = require("../models/wishlist.model");
+
 const addToWishlist = async (req, res) => {
   try {
     const { productId } = req.body;
     const user = req.user;
+
     let userWishlist = await wishlistModel.findOne({
       user: user.id,
       products: productId,
     });
+
     if (userWishlist) {
       return res.status(400).json({ message: "product already exist" });
     }
@@ -25,12 +28,15 @@ const addToWishlist = async (req, res) => {
     return res.status(500).json({ message: "Internal server error" });
   }
 };
+
 const getWishlist = async (req, res) => {
   try {
     const user = req.user;
+
     let userWishlist = await wishlistModel
       .findOne({ user: user.id })
       .populate("products");
+
     if (!userWishlist) {
       userWishlist = new wishlistModel({
         products: [],
@@ -43,6 +49,7 @@ const getWishlist = async (req, res) => {
         (product) => product
       );
     }
+
     return res.status(200).json({
       userWishlist,
     });
@@ -55,6 +62,7 @@ const removeFromWishlist = async (req, res) => {
   try {
     const productId = req.params.productId;
     const user = req.user;
+    
     const userWishlist = await wishlistModel.findOneAndUpdate(
       { user: user._id, products: productId },
       { $pull: { products: productId } },

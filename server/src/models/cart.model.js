@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+
 const cartItemSchema = mongoose.Schema(
   {
     product: {
@@ -10,11 +11,12 @@ const cartItemSchema = mongoose.Schema(
       type: Number,
       required: true,
       default: 1,
-      min: 1,
+      min: [1, 'Quantity must be at least 1'],
     },
   },
   { _id: false }
 );
+
 const cartSchema = mongoose.Schema(
   {
     user: {
@@ -27,4 +29,5 @@ const cartSchema = mongoose.Schema(
   },
   { timestamps: true }
 );
+
 module.exports = mongoose.model("Cart", cartSchema);

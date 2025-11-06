@@ -1,4 +1,5 @@
 const cartModel = require("../models/cart.model");
+
 const getCart = async (req, res) => {
   try {
     const user = req.user;
@@ -32,19 +33,19 @@ const getCart = async (req, res) => {
 };
 const addCartItem = async (req, res) => {
   try {
-    const { product } = req.body;
+    const { productId } = req.body;
     const user = req.user;
 
     let userCart = await cartModel.findOneAndUpdate(
-      { user: user.id, "items.product": product._id },
+      { user: user.id, "items.product": productId },
       { $inc: { "items.$.quantity": 1 } },
       { new: true }
     );
-
+    
     if (!userCart) {
       userCart = await cartModel.findOneAndUpdate(
         { user: user.id },
-        { $push: { items: { product: product._id, quantity: 1 } } },
+        { $push: { items: { product: productId, quantity: 1 } } },
         { new: true, upsert: true }
       );
     }

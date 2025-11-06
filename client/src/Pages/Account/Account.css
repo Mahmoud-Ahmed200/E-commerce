@@ -1,0 +1,226 @@
+.settings-layout {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: #f9f9f9;
+  padding: 40px 20px;
+}
+
+.settings-container {
+  max-width: 800px;
+  width: 100%;
+  background-color: #fff;
+  padding: 40px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.discard-btn {
+  background-color: #ffffff;
+  border: 2px solid #8338ec;
+  border-radius: 4px;
+  color: #333;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.2s, color 0.2s;
+  margin: 10px 0;
+  padding: 10px 20px;
+}
+.discard-btn:hover {
+  background-color: #8338ec;
+  color: white;
+}
+
+.btn-primary {
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  color: #333;
+  margin: 10px 0;
+}
+
+.wallet-btn {
+  background-color: #222;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  margin: 10px 0;
+}
+.wallet-btn:hover {
+  background-color: #000;
+}
+
+.settings-container h1 {
+  font-size: 28px;
+  margin-bottom: 24px;
+}
+
+.settings-container nav ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 30px;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 30px;
+}
+
+.settings-container nav a {
+  text-decoration: none;
+  color: #555;
+  padding-bottom: 16px;
+  display: inline-block;
+  font-weight: bold;
+  transition: color 0.2s;
+}
+.settings-container nav a:hover {
+  color: #8338ec;
+  border-bottom: #8338ec solid 3px;
+}
+
+.settings-container nav a.active {
+  color: #8338ec;
+  border-bottom: 3px solid #8338ec;
+}
+
+/* Section Styling */
+.account-section h2 {
+  font-size: 24px;
+  margin: 0 0 8px 0;
+}
+
+.info-section h3 {
+  font-size: 20px;
+  margin: 0 0 8px 0;
+}
+
+.settings-container section p {
+  color: #666;
+  margin-top: 0;
+}
+
+.settings-container hr {
+  border: none;
+  border-top: 1px solid #eee;
+  margin: 30px 0;
+}
+
+/* Form Styles */
+.form-row {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.settings-container label {
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #444;
+}
+
+.settings-container input[type="text"],
+.settings-container input[type="tel"] {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.settings-container input:focus {
+  outline: none;
+  border-color: #8338ec;
+  box-shadow: 0 0 0 2px rgba(131, 56, 236, 0.2);
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* Button Styles */
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.btn-primary {
+  background-color: #8338ec;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #7229d4;
+}
+
+.btn-secondary {
+  background-color: white;
+  color: #8338ec;
+  border: 1px solid #8338ec;
+}
+
+.btn-secondary:hover {
+  background-color: #f4effd;
+}
+
+/* Login Info Section */
+.info-section {
+  margin-top: 40px;
+}
+
+.login-details {
+  margin-bottom: 20px;
+}
+
+.login-details p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.login-details small {
+  color: #888;
+  font-size: 13px;
+}
+/* Responsive Styles */
+@media (max-width: 600px) {
+  .settings-container {
+    padding: 20px;
+  }
+  .settings-container nav ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .form-row {
+    flex-direction: column;
+  }
+  .form-row .form-group {
+    width: 100%;
+  }
+  .form-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .form-actions .btn {
+    width: 100%;
+  }
+}

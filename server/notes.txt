@@ -1,5 +1,0 @@
-- Enhance error handling  
-- Middleware still need to set to the routes
-- Order route
-- Payement method with stripe
-- ai chatbot (optional)

@@ -1,0 +1,175 @@
+
+/* Product (From Wishlist, kept for other pages) */
+.product-card {
+  border: 1px solid #eee;
+  border-radius: 10px;
+  transition: box-shadow 0.3s ease;
+  background-color: #ffffff;
+}
+
+.product-card:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+.product-card .card-img-top {
+  max-height: 220px;
+  width: auto;
+  max-width: 90%;
+  object-fit: contain;
+  margin: 1rem auto 0;
+  padding: 0.5rem;
+}
+
+.product-card .card-body {
+  padding: 1.5rem;
+}
+
+.delete-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.25rem;
+  z-index: 10;
+}
+
+.product-card .card-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  min-height: 50px; 
+}
+
+.rating-stars {
+  color: #ffc107;
+}
+
+.price-section {
+  text-align: left;
+}
+
+.current-price {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #212529;
+}
+
+.old-price {
+  font-size: 0.9rem;
+  color: #6c757d;
+  text-decoration: line-through;
+}
+
+.cart-btn {
+  background-color: #333;
+  border-color: #333;
+  color: white;
+  font-size: 1.2rem;
+  padding: 0.5rem 0.75rem;
+}
+
+.cart-btn:hover {
+  background-color: #000;
+  border-color: #000;
+  color: white;
+}
+
+/* DropDown Menu */
+.dropdown-menu.fade {
+  display: block;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out, visibility 0.3s;
+}
+
+
+.dropdown-menu.fade.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-item.active, .dropdown-item:active {
+  background-color: #333;
+  color: white; 
+}
+
+.dropdown-item.active i, .dropdown-item:active i {
+  color: white;
+}
+
+.order-card {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.order-card .card-header {
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #eee;
+  font-size: 0.9rem;
+}
+
+.order-card .card-header strong.d-block {
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.order-card .card-body h6 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.order-product-img {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+.order-card .card-footer {
+  background-color: #f9f9f9;
+  border-top: 1px solid #eee;
+}
+
+/* Status Badge Colors */
+.badge.bg-success {
+  background-color: #198754 !important;
+  color: white;
+}
+.badge.bg-warning {
+  background-color: #ffc107 !important;
+  color: #333;
+}
+.badge.bg-danger {
+  background-color: #dc3545 !important;
+  color: white;
+}
+
+/* Resposive design */
+@media (max-width: 575.98px) {
+
+  .product-card .card-body {
+      padding: 1rem;
+  }
+
+  .current-price {
+      font-size: 1.1rem;
+  }
+  
+  .old-price {
+      font-size: 0.8rem;
+  }
+
+  .cart-btn {
+      font-size: 1rem;
+      padding: 0.4rem 0.65rem;
+  }
+  
+  h2.mb-4 {
+      font-size: 1.5rem;
+  }
+}

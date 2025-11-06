@@ -1,4 +1,5 @@
 const nodemailer = require("nodemailer");
+
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
@@ -9,4 +10,5 @@ const transporter = nodemailer.createTransport({
     refreshToken: process.env.GOOGLE_REFRESH_TOKEN,
   },
 });
+
 module.exports = transporter;

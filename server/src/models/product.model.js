@@ -1,52 +1,58 @@
 const mongoose = require("mongoose");
+
 const productSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: true,
+      required: [true, 'Product name is required'],
       trim: true,
+      minlength: [3, 'Product name must be at least 3 characters']
     },
     description: {
       type: String,
-      required: true,
+      required: [true, 'Product description is required'],
       trim: true,
     },
     price: {
       type: Number,
-      required: true,
-      min: 0,
+      required: [true, 'Product price is required'],
+      min: [0, 'Price cannot be negative'],
     },
     brand: {
       type: String,
-      required: true,
+      required: [true, 'Brand is required'],
       trim: true,
     },
     model: {
       type: String,
-      required: true,
+      required: [true, 'Model is required'],
       trim: true,
     },
-
     category: {
       type: String,
-      enum: ["Mobile", "Mobile Accessories", "Tablet", "Laptop"],
+      enum: {
+        values: ["Mobile", "Mobile Accessories", "Tablet", "Laptop"],
+        message: '{VALUE} is not a valid category'
+      },
+      required: [true, 'Category is required']
     },
-    //its better to make category on another collection to support scalable
     stock: {
       type: Number,
-      required: true,
-      min: 0,
+      required: [true, 'Stock quantity is required'],
+      min: [0, 'Stock cannot be negative'],
     },
-    //images
+    images: [{
+      url: { type: String, required: true },
+      publicId: String,
+      alt: String,
+      isPrimary: { type: Boolean, default: false }
+    }],
     discount: {
       type: Number,
       default: 0,
-      min: 0,
+      min: [0, 'Discount cannot be negative'],
+      max: [100, 'Discount cannot exceed 100%']
     },
-    //ratingOverall
-    //reviews
-    //optional flags
-    //slang
     specifications: {
       type: Object,
       default: {},
@@ -55,10 +61,23 @@ const productSchema = new mongoose.Schema(
       type: Boolean,
       default: true,
     },
+    averageRating: {
+      type: Number,
+      default: 0,
+      min: 0,
+      max: 5
+    },
+    totalReviews: {
+      type: Number,
+      default: 0
+    }
   },
   { timestamps: true }
 );
+
+// Calculate final price after discount
 productSchema.virtual("finalPrice").get(function () {
   return parseInt(this.price - this.price * (this.discount / 100));
 });
+
 module.exports = mongoose.model("Product", productSchema);

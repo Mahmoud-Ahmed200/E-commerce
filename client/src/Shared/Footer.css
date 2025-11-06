@@ -1,0 +1,117 @@
+    /* Footer */
+    footer.footer {
+      background: #2c2e32;
+      padding: 10px 0;
+      color: #cbd5e1;
+    }
+    footer.footer a {
+      color: #cbd5e1;
+      text-decoration: none;
+    }
+ 
+
+    .cart-badge {
+      position: absolute;
+      top: -8px;
+      right: -10px;
+      background: var(--accent);
+      color: #000;
+      font-size: 12px;
+      font-weight: 700;
+      border-radius: 50%;
+      padding: 0 5px;
+    }
+
+    .text-info {
+      color: #751FFF !important;
+    }
+    /* Footer Container */
+        .footer-container {
+            background-color: #ffffff;
+            padding: 70px 5%; /* Use percentage for responsive padding */
+            color: #333;
+            font-size: 14px;
+            margin: 0;
+        }
+
+        /* Main footer content with 4 columns */
+        .footer-main {
+            display: flex;
+            flex-wrap: wrap; /* Allows columns to stack on smaller screens */
+            justify-content: space-between;
+            gap: 30px; /* Space between columns */
+            max-width: 1200px;
+            margin: 0 auto; /* Center the content */
+        }
+
+        .footer-column {
+            flex: 1; /* Each column takes equal space */
+            min-width: 220px; /* Minimum width before wrapping */
+        }
+
+        .footer-column h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .footer-column p,
+        .footer-column li {
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-column a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        .footer-column a:hover {
+            text-decoration: underline;
+        }
+
+        /* Social Icons */
+        .social-icons a {
+            margin-right: 15px;
+            font-size: 18px;
+            color: #333;
+        }
+
+        /* Horizontal Rule */
+        .footer-divider {
+            border: 0;
+            border-top: 1px solid #eee;
+            margin: 40px auto;
+            max-width: 1200px;
+        }
+
+        /* Payment Section */
+        .footer-payment {
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-payment p {
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #555;
+        }
+
+        .payment-icons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .payment-icons i {
+            font-size: 32px;
+            color: #555;
+        }

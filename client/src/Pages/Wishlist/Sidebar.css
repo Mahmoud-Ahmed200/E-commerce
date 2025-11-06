@@ -1,0 +1,29 @@
+.sidebar .list-group-item-action {
+  border: none;
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #555;
+  border-radius: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.sidebar .list-group-item-action i {
+  color: #888;
+  font-size: 1.25rem;
+}
+
+/* This 'active' class is set by NavLink */
+.sidebar .list-group-item-action.active {
+  background-color: #f1f1f1;
+  color: #333;
+  border-right: 4px solid #333;
+}
+
+.sidebar .list-group-item-action.active i {
+  color: #333;
+}
+
+.sidebar .list-group-item-action:hover {
+  background-color: #f1f1f1;
+}

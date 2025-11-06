@@ -1,0 +1,237 @@
+  .Login-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 40px;
+  }
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background-color: #ffffff;
+  padding: 30px;
+  width: 450px;
+  border-radius: 10px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+::placeholder {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.form button {
+  align-self: flex-end;
+}
+
+.flex-column > label {
+  color: #151717;
+  font-weight: 600;
+}
+
+.inputForm {
+  border: 1.5px solid #ecedec;
+  border-radius: 10px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  transition: 0.2s ease-in-out;
+}
+
+.input {
+  margin-left: 10px;
+  border-radius: 10px;
+  border: none;
+  width: 100%;
+  height: 100%;
+}
+
+.input:focus {
+  outline: none;
+}
+
+.inputForm:focus-within {
+  border: 1.5px solid #751FFF;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  justify-content: space-between;
+}
+.remember input {
+  cursor: pointer;
+}
+
+
+label {
+    font-size: 14px;
+    color: black;
+    font-weight: 400;
+}
+
+.span {
+  font-size: 14px;
+  margin-left: 5px;
+  color: #2d79f3;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.blue-sign{
+    text-decoration: none;
+    color: #2d79f3;
+}
+
+.button-submit {
+  margin: 20px 0 10px 0;
+  background-color: #151717;
+  border: none;
+  color: white;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 10px;
+  height: 50px;
+  width: 100%;
+  cursor: pointer;
+}
+
+
+.p {
+  text-align: center;
+  color: black;
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+
+.oauthButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  margin: 15px auto 0 auto;
+  padding: auto 15px 15px auto;
+  width: 250px;
+  height: 40px;
+  border-radius: 5px;
+  border: 2px solid;
+  background-color: #ffffff;
+  box-shadow: 4px 4px 8px -3px rgba(0, 0, 0, 0.27);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 300ms;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.oauthButton::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  background-color: #212121;
+  z-index: -1;
+  -webkit-box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+  box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+  transition: all 300ms;
+}
+
+.oauthButton:hover {
+  color: #e8e8e8;
+}
+
+.oauthButton:hover::before {
+  width: 100%;
+}
+.icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}   
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .Login-div {
+    margin: 20px;
+  }
+
+  .form {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+  }
+
+  .button-submit {
+    height: 45px;
+    font-size: 14px;
+  }
+
+  .oauthButton {
+    width: 100%;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .Login-div {
+    margin: 10px;
+  }
+
+  .form {
+    padding: 15px;
+  }
+
+  .inputForm {
+    height: 45px;
+  }
+
+  .flex-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .remember {
+    margin-bottom: 5px;
+  }
+
+  label {
+    font-size: 13px;
+  }
+
+  .p {
+    font-size: 13px;
+  }
+
+  .icon {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .Login-div {
+    margin: 5px;
+  }
+
+  .form {
+    padding: 10px;
+  }
+
+  .button-submit,
+  .oauthButton {
+    height: 40px;
+    font-size: 13px;
+  }
+}

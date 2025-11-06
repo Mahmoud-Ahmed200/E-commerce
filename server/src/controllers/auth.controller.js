@@ -1,22 +1,29 @@
 const users = require("../models/user.model");
 const tokenHandler = require("../utils/token");
+
 const signUp = async (req, res) => {
   try {
     const { email, fullName, password } = req.body;
+
     if (!email || !fullName || !password) {
       return res.status(400).json({ message: "Missing required fields" });
     }
+
     const userCheck = await users.findOne({ email });
     if (userCheck) {
       return res.status(409).json({ message: "User already registered" });
     }
+
     const user = await users.create({ email, fullName, password });
+
     const { plainToken, hashedToken, expiresAt } =
       tokenHandler.createCryptoToken();
+
     const link = `http://localhost:3000/auth/verifyemail?token=${plainToken}`;
     console.log(link); // for test only
     user.verifyToken = hashedToken;
     user.verifyTokenExpires = expiresAt;
+
     await user.save();
     user.verifyToken = undefined;
     user.password = undefined;
@@ -30,34 +37,96 @@ const signUp = async (req, res) => {
     return res.status(500).json({ error: error.message });
   }
 };
+
+// src/controllers/auth.controller.js (UPDATE signIn)
 const signIn = async (req, res) => {
   try {
     const { email, password } = req.body;
+    console.log("test");
     if (!email || !password) {
       return res.status(400).json({ message: "Missing required fields" });
     }
+
     const user = await users.findOne({ email }).select("+password");
-    if (!user) {
-      return res.status(404).json({ message: "Invalid email or password" });
+
+    if (!user || !(await user.comparePassword(password))) {
+      return res.status(401).json({ message: "Invalid email or password" });
     }
-    const checkPassword = await user.comparePassword(password);
-    if (!checkPassword) {
-      return res.status(400).json({ message: "Invalid email or password" });
-    }
-    user.password = undefined; //
-    user.verifyToken = undefined; //
-    user.passwordReset = undefined; //
-    const token = tokenHandler.generateJwtToken({ id: user._id });
-    res.cookie("token", token, { maxAge: 1000 * 60 * 60 * 24, httpOnly: true });
+
+    // Generate both tokens
+    const ipAddress = req.ip;
+    const { accessToken, refreshToken } = await tokenHandler.generateTokens(
+      user._id,
+      ipAddress
+    );
+
+    // Set tokens in cookies
+    res.cookie("accessToken", accessToken, {
+      maxAge: 15 * 60 * 1000, // 15 minutes
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+    });
+
+    res.cookie("refreshToken", refreshToken, {
+      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+    });
+
+    user.lastLogin = Date.now();
+    await user.save();
+    user.password = undefined;
+
     return res.status(200).json({
-      message: "user signed in successfully",
+      message: "User signed in successfully",
       user,
+      accessToken, // Also send in response for client storage if needed
     });
   } catch (error) {
     console.error("Error while signing in", error);
     return res.status(500).json({ error: error.message });
   }
 };
+
+// New refresh endpoint
+const refreshToken = async (req, res) => {
+  try {
+    const { refreshToken } = req.cookies;
+
+    if (!refreshToken) {
+      return res.status(401).json({ message: "Refresh token required" });
+    }
+
+    const ipAddress = req.ip;
+    const { accessToken, refreshToken: newRefreshToken } =
+      await tokenHandler.refreshAccessToken(refreshToken, ipAddress);
+
+    // Set new tokens
+    res.cookie("accessToken", accessToken, {
+      maxAge: 15 * 60 * 1000,
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+    });
+
+    res.cookie("refreshToken", newRefreshToken, {
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+    });
+
+    return res.status(200).json({
+      message: "Token refreshed successfully",
+      accessToken,
+    });
+  } catch (error) {
+    return res.status(401).json({ message: error.message });
+  }
+};
+
 const signOut = async (req, res) => {
   try {
     if (!req.cookies.token) {
@@ -151,6 +220,7 @@ module.exports = {
   signUp,
   signIn,
   signOut,
+  refreshToken,
   validateEmail,
   forgotPassword,
   resetPassword,
