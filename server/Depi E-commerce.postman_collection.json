@@ -1,0 +1,807 @@
+{
+	"info": {
+		"_postman_id": "bb033bc3-9872-4e46-9a17-c1507a5d8c23",
+		"name": "Depi E-commerce",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "42551109"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "sign up",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"mahmoud15234@gmail.com\",\r\n    \"fullName\": \"Mahmoud Ahmed\",\r\n    \"password\": \"Ma15234789$\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/auth/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sign in",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"mahmoud15234@gmail.com\",\r\n    \"password\": \"Ma15234789$\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/auth/signin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sign out",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/auth/signout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"signout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "verify email",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/auth/verifyemail?token=b60f508fade3e56af9f2635b46480a3f3122e25923b90a62472fe38c95cb0fab",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"verifyemail"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "b60f508fade3e56af9f2635b46480a3f3122e25923b90a62472fe38c95cb0fab"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "forget password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"mahmoud1234@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/auth/forgotpassword",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"forgotpassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "reset password",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"newPassword\":\"Ma12345467$\",\r\n    \"newPasswordConfirmation\":\"Ma12345467$\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/auth/resetpassword?token=0f94867bcf3cd63931627980c836c74a2b7face741286a86be52c0ec893a3243",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"resetpassword"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "0f94867bcf3cd63931627980c836c74a2b7face741286a86be52c0ec893a3243"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "refresh token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/auth/refreshToken",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"refreshToken"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Base URL: `http://localhost:3000/auth`\n\n---\n\n## 1\\. Sign Up\n\n**POST** `/signup`\n\n**Request:**\n\n``` json\n{\n  \"email\": \"user@example.com\",\n  \"fullName\": \"John Doe\",\n  \"password\": \"StrongP@ss123\"\n}\n\n ```\n\n**Response (201):**\n\n``` json\n{\n  \"message\": \"User signed up successfully\",\n  \"user\": { ... }\n}\n\n ```\n\n**Business Logic:**\n\n1. Validate required fields\n    \n2. Check if email already exists → Return 409 if exists\n    \n3. Create user with hashed password\n    \n4. Generate verification token (60 min expiry)\n    \n5. Save hashed token to database\n    \n6. Send verification email\n    \n7. Return user data (password excluded)\n    \n\n---\n\n## 2\\. Sign In\n\n**POST** `/signin`\n\n**Request:**\n\n``` json\n{\n  \"email\": \"user@example.com\",\n  \"password\": \"StrongP@ss123\"\n}\n\n ```\n\n**Response (200):**\n\n``` json\n{\n  \"message\": \"user signed in successfully\",\n  \"user\": { ... }\n}\n\n ```\n\nCookie: `token=eyJhbGc...` (24h expiry, httpOnly)\n\n**Business Logic:**\n\n1. Validate email and password\n    \n2. Find user by email\n    \n3. Compare password with hashed password → Return 400 if wrong\n    \n4. Generate JWT token with user ID\n    \n5. Set HTTP-only cookie\n    \n6. Return user data\n    \n\n---\n\n## 3\\. Sign Out\n\n**POST** `/signout`\n\n**Response (200):**\n\n``` json\n{\n  \"message\": \"User signed out successfully\"\n}\n\n ```\n\n**Business Logic:**\n\n1. Clear JWT cookie\n    \n2. Return success\n    \n\n---\n\n## 4\\. Verify Email\n\n**GET** `/verifyemail?token={token}`\n\n**Example:** `/verifyemail?token=abc123def456...`\n\n**Response (200):**\n\n``` json\n{\n  \"message\": \"User verified successfully\",\n  \"user\": { \"isVerified\": true, ... }\n}\n\n ```\n\n**Business Logic:**\n\n1. Extract token from query params\n    \n2. Hash token and find user\n    \n3. Check if token expired → Return 401 if expired\n    \n4. Set `isVerified = true`\n    \n5. Clear token from database\n    \n6. Return updated user\n    \n\n---\n\n## 5\\. Forgot Password\n\n**POST** `/forgotpassword`\n\n**Request:**\n\n``` json\n{\n  \"email\": \"user@example.com\"\n}\n\n ```\n\n**Response (200):**\n\n``` json\n{\n  \"message\": \"Password reset link has been sent\"\n}\n\n ```\n\n**Business Logic:**\n\n1. Find user by email → Return 404 if not found\n    \n2. Generate reset token (60 min expiry)\n    \n3. Save hashed token to database\n    \n4. Send reset email with link\n    \n5. Return success\n    \n\n---\n\n## 6\\. Reset Password\n\n**PATCH** `/resetpassword?token={token}`\n\n**Request:**\n\n``` json\n{\n  \"newPassword\": \"NewStrongP@ss456\",\n  \"newPasswordConfirmation\": \"NewStrongP@ss456\"\n}\n\n ```\n\n**Response (200):**\n\n``` json\n{\n  \"message\": \"Password reseted successfully\"\n}\n\n ```\n\n**Business Logic:**\n\n1. Validate passwords match → Return 400 if not\n    \n2. Hash token and find user\n    \n3. Check if token expired → Return 400 if expired\n    \n4. Update password (auto-hashed by bcrypt)\n    \n5. Clear reset token from database\n    \n6. Return success\n    \n\n---\n\n## Error Codes\n\n- **400** - Bad request (missing fields, validation failed)\n    \n- **401** - Unauthorized (expired token)\n    \n- **404** - Not found (user doesn't exist)\n    \n- **409** - Conflict (email already exists)\n    \n- **500** - Internal server error\n    \n\n## Security Notes\n\n- Passwords hashed with bcrypt (10 rounds)\n    \n- Tokens hashed with SHA-256\n    \n- JWT stored in HTTP-only cookie (prevents XSS)\n    \n- Tokens expire in 60 minutes\n    \n- JWT expires in 24 hours"
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "get profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/user/profile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "edit profile",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fullName\":\"Mahmoud ahmed\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/user/editProfile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"editProfile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "change password",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"oldPassword\":\"Ma12345467$\",\r\n    \"newPassword\":\"Ma12346464$\",\r\n    \"newPasswordConfirmation\":\"Ma12346464$\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/user/changePassword",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"changePassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "upload profile picture",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "photo",
+									"type": "file",
+									"src": "/D:/Photos/projects/Screenshot 2025-09-09 175744.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/user/profile-photo",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"profile-photo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete profile picture",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/user/profile-photo",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"profile-photo"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Base URL: `http://localhost:3000/user`\n\n**Note:** All endpoints require authentication (JWT token in cookie)\n\n---\n\n## 1\\. Get Profile\n\n**GET** `/profile`\n\n**Headers:**\n\n```\nCookie: token=eyJhbGc...\n\n ```\n\n**Response (200):**\n\n``` json\n{\n  \"message\": \"Profile fetched successfully\",\n  \"user\": {\n    \"_id\": \"507f1f77bcf86cd799439011\",\n    \"email\": \"user@example.com\",\n    \"fullName\": \"John Doe\",\n    \"role\": \"user\",\n    \"isVerified\": true,\n    \"createdAt\": \"2025-10-03T10:30:00.000Z\",\n    \"updatedAt\": \"2025-10-03T10:30:00.000Z\"\n  }\n}\n\n ```\n\n**Business Logic:**\n\n1. Verify user is authenticated (from middleware)\n    \n2. Return user data from request object\n    \n\n**Middleware:** `isAuth`\n\n---\n\n## 2\\. Edit Profile\n\n**PATCH** `/editProfile`\n\n**Headers:**\n\n```\nCookie: token=eyJhbGc...\n\n ```\n\n**Request:**\n\n``` json\n{\n  \"fullName\": \"John Smith\"\n}\n\n ```\n\n**Response (200):**\n\n``` json\n{\n  \"message\": \"User attributes updated successfully\",\n  \"user\": {\n    \"fullName\": \"John Smith\",\n    ...\n  }\n}\n\n ```\n\n**Business Logic:**\n\n1. Verify user is authenticated and verified\n    \n2. Validate fullName is provided → Return 400 if missing\n    \n3. Check if fullName is different from current → Return 200 with \"No changes\" if same\n    \n4. Update user in database\n    \n5. Return updated user data\n    \n\n**Middleware:** `isAuth`, `isVerified`\n\n---\n\n## 3\\. Change Password\n\n**PATCH** `/changePassword`\n\n**Headers:**\n\n```\nCookie: token=eyJhbGc...\n\n ```\n\n**Request:**\n\n``` json\n{\n  \"oldPassword\": \"OldStrongP@ss123\",\n  \"newPassword\": \"NewStrongP@ss456\",\n  \"newPasswordConfirmation\": \"NewStrongP@ss456\"\n}\n\n ```\n\n**Response (200):**\n\n``` json\n{\n  \"message\": \"Password changed successfully\"\n}\n\n ```\n\n**Business Logic:**\n\n1. Verify user is authenticated\n    \n2. Validate all fields provided → Return 400 if missing\n    \n3. Check newPassword matches confirmation → Return 400 if not\n    \n4. Find user and verify oldPassword → Return 400 if wrong\n    \n5. Check newPassword is different from oldPassword → Return 400 if same\n    \n6. Update password (auto-hashed by bcrypt)\n    \n7. Return success\n    \n\n**Middleware:** `isAuth`\n\n---\n\n## Error Codes\n\n- **400** - Bad request (missing fields, validation failed, same password)\n    \n- **401** - Unauthorized (not authenticated)\n    \n- **403** - Forbidden (not verified)\n    \n- **500** - Internal server error\n    \n\n## Security Notes\n\n- All endpoints require valid JWT token\n    \n- Edit profile requires email verification\n    \n- Old password verified before changing\n    \n- New password cannot be same as old password\n    \n- Passwords auto-hashed with bcrypt"
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "get product",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/product/68e80f79314e664efb52ab26",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"product",
+								"68e80f79314e664efb52ab26"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get products by filter",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/product/?page=2&limit=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"product",
+								""
+							],
+							"query": [
+								{
+									"key": "category",
+									"value": "Laptop",
+									"disabled": true
+								},
+								{
+									"key": "minPrice",
+									"value": "1500",
+									"disabled": true
+								},
+								{
+									"key": "maxPrice",
+									"value": "2000",
+									"disabled": true
+								},
+								{
+									"key": "brand",
+									"value": "Samsung",
+									"disabled": true
+								},
+								{
+									"key": "ram",
+									"value": "12GB",
+									"disabled": true
+								},
+								{
+									"key": "display",
+									"value": "16inch",
+									"disabled": true
+								},
+								{
+									"key": "storage",
+									"value": "512GB",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "2"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cart",
+			"item": [
+				{
+					"name": "add to cart",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{        \"productId\": \"68e80f79314e664efb52ab26\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/cart",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"cart"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get cart",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"item\": {\r\n        \"_id\": \"68e80f79314e664efb52ab26\",\r\n        \"name\": \"Samsung Galaxy Book3 Pro 360\",\r\n        \"description\": \"A thin and light 2-in-1 with a gorgeous AMOLED display and S Pen support for ultimate creativity and productivity.\",\r\n        \"price\": 65000,\r\n        \"brand\": \"Samsung\",\r\n        \"model\": \"Galaxy Book3 Pro 360\",\r\n        \"category\": \"Laptop\",\r\n        \"stock\": 65,\r\n        \"discount\": 15,\r\n        \"specifications\": {\r\n            \"processor\": \"Intel Core i7-1360P\",\r\n            \"ram\": \"16GB\",\r\n            \"storage_type\": \"SSD\",\r\n            \"storage_capacity\": \"1TB\",\r\n            \"graphics_card\": \"Intel Iris Xe Graphics\",\r\n            \"display_size\": \"16 inches\",\r\n            \"display_resolution\": \"2880x1800\",\r\n            \"display_type\": \"Dynamic AMOLED 2X Touch\",\r\n            \"os\": \"Windows 11 Home\",\r\n            \"color\": \"Graphite\",\r\n            \"weight\": \"1.71 kg\"\r\n        },\r\n        \"isActive\": true\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/cart",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"cart"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "clear cart",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"item\": {\r\n        \"_id\": \"68e80f79314e664efb52ab26\",\r\n        \"name\": \"Samsung Galaxy Book3 Pro 360\",\r\n        \"description\": \"A thin and light 2-in-1 with a gorgeous AMOLED display and S Pen support for ultimate creativity and productivity.\",\r\n        \"price\": 65000,\r\n        \"brand\": \"Samsung\",\r\n        \"model\": \"Galaxy Book3 Pro 360\",\r\n        \"category\": \"Laptop\",\r\n        \"stock\": 65,\r\n        \"discount\": 15,\r\n        \"specifications\": {\r\n            \"processor\": \"Intel Core i7-1360P\",\r\n            \"ram\": \"16GB\",\r\n            \"storage_type\": \"SSD\",\r\n            \"storage_capacity\": \"1TB\",\r\n            \"graphics_card\": \"Intel Iris Xe Graphics\",\r\n            \"display_size\": \"16 inches\",\r\n            \"display_resolution\": \"2880x1800\",\r\n            \"display_type\": \"Dynamic AMOLED 2X Touch\",\r\n            \"os\": \"Windows 11 Home\",\r\n            \"color\": \"Graphite\",\r\n            \"weight\": \"1.71 kg\"\r\n        },\r\n        \"isActive\": true\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/cart",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"cart"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update quantity",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"quantity\":5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/cart/product/68e80f79314e664efb52ab26",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"cart",
+								"product",
+								"68e80f79314e664efb52ab26"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove item",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"item\": {\r\n        \"_id\": \"68e80f79314e664efb52ab26\",\r\n        \"name\": \"Samsung Galaxy Book3 Pro 360\",\r\n        \"description\": \"A thin and light 2-in-1 with a gorgeous AMOLED display and S Pen support for ultimate creativity and productivity.\",\r\n        \"price\": 65000,\r\n        \"brand\": \"Samsung\",\r\n        \"model\": \"Galaxy Book3 Pro 360\",\r\n        \"category\": \"Laptop\",\r\n        \"stock\": 65,\r\n        \"discount\": 15,\r\n        \"specifications\": {\r\n            \"processor\": \"Intel Core i7-1360P\",\r\n            \"ram\": \"16GB\",\r\n            \"storage_type\": \"SSD\",\r\n            \"storage_capacity\": \"1TB\",\r\n            \"graphics_card\": \"Intel Iris Xe Graphics\",\r\n            \"display_size\": \"16 inches\",\r\n            \"display_resolution\": \"2880x1800\",\r\n            \"display_type\": \"Dynamic AMOLED 2X Touch\",\r\n            \"os\": \"Windows 11 Home\",\r\n            \"color\": \"Graphite\",\r\n            \"weight\": \"1.71 kg\"\r\n        },\r\n        \"isActive\": true\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/cart/product/68e80f79314e664efb52ab26",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"cart",
+								"product",
+								"68e80f79314e664efb52ab26"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Wishlist",
+			"item": [
+				{
+					"name": "get wishlist",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"item\": {\r\n        \"_id\": \"68e80f79314e664efb52ab26\",\r\n        \"name\": \"Samsung Galaxy Book3 Pro 360\",\r\n        \"description\": \"A thin and light 2-in-1 with a gorgeous AMOLED display and S Pen support for ultimate creativity and productivity.\",\r\n        \"price\": 65000,\r\n        \"brand\": \"Samsung\",\r\n        \"model\": \"Galaxy Book3 Pro 360\",\r\n        \"category\": \"Laptop\",\r\n        \"stock\": 65,\r\n        \"discount\": 15,\r\n        \"specifications\": {\r\n            \"processor\": \"Intel Core i7-1360P\",\r\n            \"ram\": \"16GB\",\r\n            \"storage_type\": \"SSD\",\r\n            \"storage_capacity\": \"1TB\",\r\n            \"graphics_card\": \"Intel Iris Xe Graphics\",\r\n            \"display_size\": \"16 inches\",\r\n            \"display_resolution\": \"2880x1800\",\r\n            \"display_type\": \"Dynamic AMOLED 2X Touch\",\r\n            \"os\": \"Windows 11 Home\",\r\n            \"color\": \"Graphite\",\r\n            \"weight\": \"1.71 kg\"\r\n        },\r\n        \"isActive\": true\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/wishlist",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"wishlist"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove from wishlist",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/wishlist/68e80f79314e664efb52ab26",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"wishlist",
+								"68e80f79314e664efb52ab26"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add to wishlist",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productId\":\"68e80f79314e664efb52ab26\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/wishlist",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"wishlist"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "create order",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"shippingAddress\": {\r\n    \"street\": \"12 El-Maadi St\",\r\n    \"city\": \"Cairo\",\r\n    \"postalCode\": \"11728\",\r\n    \"country\": \"Egypt\"\r\n  },\r\n  \"paymentMethod\": \"cash\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/order",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get order",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"item\": {\r\n        \"_id\": \"68e80f79314e664efb52ab26\",\r\n        \"name\": \"Samsung Galaxy Book3 Pro 360\",\r\n        \"description\": \"A thin and light 2-in-1 with a gorgeous AMOLED display and S Pen support for ultimate creativity and productivity.\",\r\n        \"price\": 65000,\r\n        \"brand\": \"Samsung\",\r\n        \"model\": \"Galaxy Book3 Pro 360\",\r\n        \"category\": \"Laptop\",\r\n        \"stock\": 65,\r\n        \"discount\": 15,\r\n        \"specifications\": {\r\n            \"processor\": \"Intel Core i7-1360P\",\r\n            \"ram\": \"16GB\",\r\n            \"storage_type\": \"SSD\",\r\n            \"storage_capacity\": \"1TB\",\r\n            \"graphics_card\": \"Intel Iris Xe Graphics\",\r\n            \"display_size\": \"16 inches\",\r\n            \"display_resolution\": \"2880x1800\",\r\n            \"display_type\": \"Dynamic AMOLED 2X Touch\",\r\n            \"os\": \"Windows 11 Home\",\r\n            \"color\": \"Graphite\",\r\n            \"weight\": \"1.71 kg\"\r\n        },\r\n        \"isActive\": true\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/order/690ce1f545277db6b7928cd8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"order",
+								"690ce1f545277db6b7928cd8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cancel order",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"item\": {\r\n        \"_id\": \"68e80f79314e664efb52ab26\",\r\n        \"name\": \"Samsung Galaxy Book3 Pro 360\",\r\n        \"description\": \"A thin and light 2-in-1 with a gorgeous AMOLED display and S Pen support for ultimate creativity and productivity.\",\r\n        \"price\": 65000,\r\n        \"brand\": \"Samsung\",\r\n        \"model\": \"Galaxy Book3 Pro 360\",\r\n        \"category\": \"Laptop\",\r\n        \"stock\": 65,\r\n        \"discount\": 15,\r\n        \"specifications\": {\r\n            \"processor\": \"Intel Core i7-1360P\",\r\n            \"ram\": \"16GB\",\r\n            \"storage_type\": \"SSD\",\r\n            \"storage_capacity\": \"1TB\",\r\n            \"graphics_card\": \"Intel Iris Xe Graphics\",\r\n            \"display_size\": \"16 inches\",\r\n            \"display_resolution\": \"2880x1800\",\r\n            \"display_type\": \"Dynamic AMOLED 2X Touch\",\r\n            \"os\": \"Windows 11 Home\",\r\n            \"color\": \"Graphite\",\r\n            \"weight\": \"1.71 kg\"\r\n        },\r\n        \"isActive\": true\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/order/690ce1f545277db6b7928cd8/cancel",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"order",
+								"690ce1f545277db6b7928cd8",
+								"cancel"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get orders",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"item\": {\r\n        \"_id\": \"68e80f79314e664efb52ab26\",\r\n        \"name\": \"Samsung Galaxy Book3 Pro 360\",\r\n        \"description\": \"A thin and light 2-in-1 with a gorgeous AMOLED display and S Pen support for ultimate creativity and productivity.\",\r\n        \"price\": 65000,\r\n        \"brand\": \"Samsung\",\r\n        \"model\": \"Galaxy Book3 Pro 360\",\r\n        \"category\": \"Laptop\",\r\n        \"stock\": 65,\r\n        \"discount\": 15,\r\n        \"specifications\": {\r\n            \"processor\": \"Intel Core i7-1360P\",\r\n            \"ram\": \"16GB\",\r\n            \"storage_type\": \"SSD\",\r\n            \"storage_capacity\": \"1TB\",\r\n            \"graphics_card\": \"Intel Iris Xe Graphics\",\r\n            \"display_size\": \"16 inches\",\r\n            \"display_resolution\": \"2880x1800\",\r\n            \"display_type\": \"Dynamic AMOLED 2X Touch\",\r\n            \"os\": \"Windows 11 Home\",\r\n            \"color\": \"Graphite\",\r\n            \"weight\": \"1.71 kg\"\r\n        },\r\n        \"isActive\": true\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/order",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"order"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

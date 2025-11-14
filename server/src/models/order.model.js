@@ -67,13 +67,6 @@ const orderSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// Generate order number before saving
-orderSchema.pre("save", async function (next) {
-  if (!this.orderNumber) {
-    const count = await mongoose.model("Order").countDocuments();
-    this.orderNumber = `ORD-${Date.now()}-${count + 1}`;
-  }
-  next();
-});
+
 
 module.exports = mongoose.model("Order", orderSchema);

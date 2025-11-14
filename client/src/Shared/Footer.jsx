@@ -12,14 +12,14 @@ function Footer() {
             <div className="footer-column">
               <h3>Store Location</h3>
               <p>
-                500 Terry Francine Street
+               22 Tahrir street
                 <br />
-                San Francisco, CA 94158
+                Cairo, Egypt
               </p>
               <p>
-                <a href="mailto:info@mysite.com">info@mysite.com</a>
+                <a href="mailto:info@mysite.com">ModernTech@mysite.com</a>
               </p>
-              <p>123-456-7890</p>
+              <p>+20 106 575 4308</p>
               <div className="social-icons">
                 <button
                   type="button"
@@ -60,13 +60,13 @@ function Footer() {
               <h3>Shop</h3>
               <ul>
                 <li>
-                  <Link to="/shop">Shop All</Link>
+                  <Link to="/products">Shop All</Link>
                 </li>
                 <li>
-                  <Link to="/shop?category=computers">Computers</Link>
+                  <Link to="/products?category=Laptop">Laptops</Link>
                 </li>
                 <li>
-                  <Link to="/shop?category=tablets">Tablets</Link>
+                  <Link to="/products?category=Tablet">Tablets</Link>
                 </li>
               </ul>
             </div>
@@ -78,14 +78,12 @@ function Footer() {
                   <Link to="/contact">Contact Us</Link>
                 </li>
                 <li>
-                  <Link to="/help">Help Center</Link>
+                  <Link to="/not-found">Help Center</Link>
                 </li>
                 <li>
                   <Link to="/about">About Us</Link>
                 </li>
-                <li>
-                  <Link to="/careers">Careers</Link>
-                </li>
+               
               </ul>
             </div>
 
@@ -93,10 +91,10 @@ function Footer() {
               <h3>Policy</h3>
               <ul>
                 <li>
-                  <Link to="/shipping-returns">Shipping &amp; Returns</Link>
+                <Link to="/not-found">Shipping &amp; Returns</Link>
                 </li>
                 <li>
-                  <Link to="/terms">Terms &amp; Conditions</Link>
+                  <Link to="/not-found">Terms &amp; Conditions</Link>
                 </li>
               </ul>
             </div>
@@ -132,6 +130,22 @@ function Footer() {
             >
               <i className="bi bi-instagram" aria-hidden="true"></i>
             </a>
+            <a
+              href="https://github.com/Ziadwael0/E-commerce-website-"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+            >
+              <i className="bi bi-github" aria-hidden="true"></i>
+            </a>
+            <a
+            href="https://www.youtube.com/@ZiadVictory"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="YouTube"
+          >
+            <i className="bi bi-youtube" aria-hidden="true"></i>
+          </a>
           </div>
         </div>
       </footer>

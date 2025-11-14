@@ -25,20 +25,6 @@ function Sidebar() {
         <span>My Wishlist</span>
         <i className="bi bi-heart"></i>
       </NavLink>
-      <NavLink
-        to="/my-quotes" // Assuming route
-        className="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
-      >
-        <span>My Quotes</span>
-        <i className="bi bi-file-earmark-text"></i>
-      </NavLink>
-      <NavLink
-        to="/corporate-account" // Assuming route
-        className="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
-      >
-        <span>Corporate Account</span>
-        <i className="bi bi-building"></i>
-      </NavLink>
     </div>
   );
 }

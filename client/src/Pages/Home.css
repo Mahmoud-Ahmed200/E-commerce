@@ -45,6 +45,10 @@
   color: #751fff;
 }
 
+.price p {
+  color: #751fff;
+}
+
 .cta svg {
   transform: translateX(-8px);
   transition: all 0.3s ease;
@@ -104,6 +108,10 @@
 .hero {
   min-height: 300px;
 }
+.category-card:hover {
+  transform: scale(1.1);
+  transition: ease-in-out 0.5s;
+}
 
 @media (min-width: 768px) {
   .hero {
@@ -135,6 +143,9 @@
   height: 400px;
   object-fit: cover;
   object-position: center 100%;
+}
+.card-body{
+ height: 200px;
 }
 
 @media (min-width: 768px) {

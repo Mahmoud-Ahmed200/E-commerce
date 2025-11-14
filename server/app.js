@@ -25,8 +25,8 @@ app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 app.use(cookieParser());
 
 // Rate Limiting
-const { apiLimiter } = require("./src/middleware/rateLimiter.middleware");
-app.use("/api/", apiLimiter);
+// const { apiLimiter } = require("./src/middleware/rateLimiter.middleware");
+// app.use("/api/", apiLimiter);
 
 // Auth & Validation Middlewares
 const { isAuth, isVerified } = require("./src/middleware/auth.middleware");

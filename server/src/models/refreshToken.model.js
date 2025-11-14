@@ -32,6 +32,5 @@ refreshTokenSchema.virtual("isActive").get(function () {
   return !this.revokedAt && !this.isExpired;
 });
 
-refreshTokenSchema.index({ expiresAt: 1 }, { expireAfterSeconds: 0 });
 
 module.exports = mongoose.model("RefreshToken", refreshTokenSchema);

@@ -82,7 +82,7 @@ const signIn = async (req, res) => {
     return res.status(200).json({
       message: "User signed in successfully",
       user,
-      accessToken, // Also send in response for client storage if needed
+      accessToken, 
     });
   } catch (error) {
     console.error("Error while signing in", error);
@@ -129,18 +129,31 @@ const refreshToken = async (req, res) => {
 
 const signOut = async (req, res) => {
   try {
-    if (!req.cookies.token) {
+    // Check if there are any active tokens
+    if (!req.cookies.accessToken && !req.cookies.refreshToken) {
       return res.status(200).json({ message: "No active session" });
     }
-    res.clearCookie("token", {
+
+    // Clear both tokens
+    res.clearCookie("accessToken", {
       httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
     });
+
+    res.clearCookie("refreshToken", {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+    });
+
     return res.status(200).json({ message: "User signed out successfully" });
   } catch (error) {
     console.error("error while signing out", error);
     return res.status(500).json({ error: "Internal server error" });
   }
 };
+
 const validateEmail = async (req, res) => {
   try {
     const { token } = req.query;

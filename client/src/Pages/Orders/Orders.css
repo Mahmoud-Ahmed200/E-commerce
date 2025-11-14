@@ -1,5 +1,5 @@
 
-/* Product (From Wishlist, kept for other pages) */
+
 .product-card {
   border: 1px solid #eee;
   border-radius: 10px;
@@ -149,7 +149,7 @@
   color: white;
 }
 
-/* Resposive design */
+
 @media (max-width: 575.98px) {
 
   .product-card .card-body {

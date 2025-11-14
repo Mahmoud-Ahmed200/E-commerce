@@ -1,50 +1,39 @@
 const buildProductFilter = (query) => {
   const filter = {};
-
+  
+  if (query.search) {
+    filter.name = { $regex: query.search, $options: 'i' }; // this option ignore case
+  }
+  
+  if (query.category) {
+    filter.category = query.category;
+  }
+  
   if (query.minPrice || query.maxPrice) {
     filter.price = {};
     if (query.minPrice) filter.price.$gte = Number(query.minPrice);
     if (query.maxPrice) filter.price.$lte = Number(query.maxPrice);
   }
-
-  if (query.category) {
-    filter.category = query.category;
-  }
-
-  if (query.brand) {
-    filter.brand = new RegExp(query.brand, "i");
-  }
-
-  if (query.inStock === "true") {
-    filter.stock = { $gt: 0 };
-  }
-
-  if (query.search) {
-    filter.$or = [
-      { name: new RegExp(query.search, "i") },
-      { description: new RegExp(query.search, "i") },
-      { brand: new RegExp(query.search, "i") },
-    ];
-  }
-
+  
   filter.isActive = true;
-
+  
   return filter;
 };
 
 const buildSortOptions = (sortBy) => {
   const sortOptions = {
-    "price-asc": { price: 1 },
-    "price-desc": { price: -1 },
-    "name-asc": { name: 1 },
-    "name-desc": { name: -1 },
     newest: { createdAt: -1 },
+    'price-low-high': { price: 1 },
+    'price-high-low': { price: -1 },
+    'name-az': { name: 1 },
+    'name-za': { name: -1 },
+    recommended: { averageRating: -1, totalReviews: -1 }
   };
-
-  return sortOptions[sortBy] || { createdAt: -1 };
+  
+  return sortOptions[sortBy] || sortOptions.newest;
 };
 
 module.exports = {
   buildProductFilter,
-  buildSortOptions,
+  buildSortOptions
 };

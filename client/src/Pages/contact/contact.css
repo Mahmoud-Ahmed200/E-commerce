@@ -3,7 +3,7 @@
     margin: 0 auto;
 }
 
-/* Form Styling */
+
 .form-control {
     padding: 0.8rem;
     border: 1px solid #e0e0e0;
@@ -22,7 +22,6 @@
     margin-bottom: 0.5rem;
 }
 
-/* Button Styling */
 .btn-primary {
     background-color: #751FFF !important;
     border: none;
@@ -34,7 +33,7 @@
     background-color: #5a17cc !important;
 }
 
-/* Responsive Styles */
+
 @media (max-width: 992px) {
     #contact {
         padding: 2rem;
