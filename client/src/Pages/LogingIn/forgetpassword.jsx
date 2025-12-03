@@ -3,16 +3,29 @@ import "./ForgetPassword.css";
 import "./Login.css";
 import { useState } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 function ForgetPassword() {
   const [email, setEmail] = useState("");
-  const [error, setError] = useState(null);
-  const [successMessage, setSuccessMessage] = useState(null);
+
+  const showError = (message) => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: message,
+        confirmButtonColor: '#d33',
+        confirmButtonText: 'OK',
+        showClass: {
+          popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp'
+        }
+      });
+    };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(null);
-    setSuccessMessage(null);
 
     try {
       const response = await axios.post(
@@ -20,12 +33,24 @@ function ForgetPassword() {
         { email }
       );
 
-      console.log("Reset link sent:", response.data.message);
-      setSuccessMessage(response.data.message || "Password reset link has been sent to your email.");
+      await Swal.fire({
+          icon: 'success',
+          title: 'Reset Link Sent!',
+          text: 'Please check your email.',
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'Go to Login',
+          showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+          }
+      });
+      navigate("/Login");
 
-    } catch (err) {
-      console.error(err);
-      setError(err.response?.data?.message || err.message || "Failed to send reset link");
+    } 
+    catch (err) {
+      showError(err.response?.data?.message || err.message || "Failed to send reset link");
     }
   };
 
@@ -36,9 +61,6 @@ function ForgetPassword() {
           <div>
             <h1 className="text-center">Forget Password </h1>
           </div>
-
-          {error && <p style={{ color: "red", textAlign: "center" }}>{error}</p>}
-          {successMessage && <p style={{ color: "green", textAlign: "center" }}>{successMessage}</p>}
 
           <div className="flex-column">
             <label>Email </label>
