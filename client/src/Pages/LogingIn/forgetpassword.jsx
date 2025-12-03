@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./ForgetPassword.css";
 import "./Login.css";
 import { useState } from "react";
@@ -7,6 +7,8 @@ import Swal from "sweetalert2";
 
 function ForgetPassword() {
   const [email, setEmail] = useState("");
+
+  const navigate = useNavigate();
 
   const showError = (message) => {
       Swal.fire({
