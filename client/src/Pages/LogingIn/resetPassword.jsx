@@ -1,30 +1,43 @@
 import { useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 function ResetPass() {
   const [newPassword, setNewPassword] = useState("");
   const [newPasswordConfirmation, setNewPasswordConfirmation] = useState("");
-  const [error, setError] = useState(null);
-  const [successMessage, setSuccessMessage] = useState(null);
 
   const [searchParams] = useSearchParams();
   const token = searchParams.get("token");
 
   const navigate = useNavigate();
 
+  const showError = (message) => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: message,
+        confirmButtonColor: '#d33',
+        confirmButtonText: 'OK',
+        showClass: {
+          popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp'
+        }
+      });
+    };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(null);
-    setSuccessMessage(null);
 
     if (newPassword !== newPasswordConfirmation) {
-      setError("Passwords do not match");
+      showError("Passwords do not match");
       return;
     }
 
     if (!token) {
-      setError("Invalid or missing reset token. Please use the link from your email.");
+      showError("Invalid or missing reset token. Please use the link from your email.");
       return;
     }
 
@@ -34,16 +47,27 @@ function ResetPass() {
         { newPassword, newPasswordConfirmation }
       );
 
-      console.log("Password reset success:", response.data.message);
-      setSuccessMessage("Password reset successfully! Redirecting to login...");
+      await Swal.fire({
+        icon: "success",
+        title: "Password reset successfully!",
+        text: "Redirecting to login...",
+        confirmButtonColor: "#3085d6",
+        confirmButtonText: "Go to Login",
+        showClass: {
+          popup: "animate__animated animate__fadeInDown",
+        },
+        hideClass: {
+          popup: "animate__animated animate__fadeOutUp",
+        },
+      });
 
       setTimeout(() => {
         navigate("/Login");
       }, 3000);
 
-    } catch (err) {
-      console.error(err);
-      setError(err.response?.data?.message || err.message || "Failed to reset password");
+    } 
+    catch (err) {
+      showError(err.response?.data?.message || err.message || "Failed to reset password");
     }
   };
 
@@ -54,9 +78,6 @@ function ResetPass() {
           <div>
             <h1 className="mb-5">Reset your password</h1>
           </div>
-
-          {error && <p style={{ color: "red", textAlign: "center" }}>{error}</p>}
-          {successMessage && <p style={{ color: "green", textAlign: "center" }}>{successMessage}</p>}
 
           <div className="inputForm my-3">
             <input
