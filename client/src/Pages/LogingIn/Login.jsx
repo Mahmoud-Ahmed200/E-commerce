@@ -2,19 +2,34 @@ import "./Login.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from 'axios';
+import Swal from "sweetalert2";
 axios.defaults.withCredentials = true;
 
 function Login({ setUser }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(null);
   
   const navigate = useNavigate();
 
+  const showError = (message) => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: message,
+        confirmButtonColor: '#d33',
+        confirmButtonText: 'OK',
+        showClass: {
+          popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp'
+        }
+      });
+    };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(null);
-
+    
     try {
       const response = await axios.post(
         "http://localhost:3000/api/v1/auth/signin", 
@@ -25,9 +40,9 @@ function Login({ setUser }) {
       
       navigate("/");
 
-    } catch (err) {
-      console.error(err);
-      setError(err.response?.data?.message || err.message || "Login failed");
+    } 
+    catch (err) {
+      showError(err.response?.data?.message || err.message || "Login failed");
     }
   };
 
@@ -39,8 +54,6 @@ function Login({ setUser }) {
             <h1 className="text-center">Log In</h1>
           </div>
           
-          {error && <p style={{ color: "red", textAlign: "center" }}>{error}</p>}
-
           <div className="flex-column">
             <label>Email </label>
           </div>
