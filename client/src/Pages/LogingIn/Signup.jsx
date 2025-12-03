@@ -3,35 +3,48 @@ import "./Login.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import Swal from 'sweetalert2';
 
 function SignUp() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(null);
-  
+
   const navigate = useNavigate();
+
+  const showError = (message) => {
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: message,
+      confirmButtonColor: '#d33',
+      confirmButtonText: 'OK',
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+      }
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(null);
 
     if (!firstName.trim() || !lastName.trim()) {
-      setError("Please enter both first and last name");
+      showError("Please enter both first and last name");
       return;
     }
 
     if (!email.trim() || !password.trim()) {
-      setError("Please enter both email and password");
+      showError("Please enter both email and password");
       return;
     }
 
     const fullName = `${firstName.trim()} ${lastName.trim()}`;
 
-    try {
-      console.log("Sending signup request...", { fullName, email });
-      
+    try {      
       const response = await axios.post(
         "http://localhost:3000/api/v1/auth/signup",
         {
@@ -47,24 +60,32 @@ function SignUp() {
         }
       );
 
-      console.log("Response:", response.data);
+      await Swal.fire({
+        icon: 'success',
+        title: 'Sign Up Successful!',
+        text: 'Please check your email to verify your account.',
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'Go to Login',
+        showClass: {
+          popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp'
+        }
+      });
 
-      console.log("Sign up successful:", response.data.user);
-      alert("Sign up successful! Please check your email to verify your account.");
-      
       navigate("/Login");
 
-    } catch (err) {
-      console.error("Signup error:", err);
-      
+    } 
+    catch (err) {      
       if (err.response) {
-        setError(err.response.data.message || err.response.data.error || "Sign up failed");
+        showError(err.response.data.message || err.response.data.error || "Sign up failed");
       } 
-        else if (err.request) {
-        setError("No response from server. Please check if the backend is running.");
+      else if (err.request) {
+        showError("No response from server. Please check if the backend is running.");
       } 
       else {
-        setError(err.message || "An error occurred during sign up");
+        showError(err.message || "An error occurred during sign up");
       }
     }
   };
@@ -76,19 +97,6 @@ function SignUp() {
           <div>
             <h1 className="text-center">Sign up</h1>
           </div>
-          
-          {error && (
-            <div style={{ 
-              color: "red", 
-              textAlign: "center", 
-              marginBottom: "10px",
-              padding: "10px",
-              backgroundColor: "#ffebee",
-              borderRadius: "4px"
-            }}>
-              {error}
-            </div>
-          )}
 
           <div className="flex-column">
             <label>First Name </label>
