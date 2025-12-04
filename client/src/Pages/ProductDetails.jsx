@@ -24,25 +24,36 @@ function ProductDetails() {
         setLoading(true);
         setError(null);
 
-        // Fetch product details
-        const productRes = await axios.get(
-          `http://localhost:3000/api/v1/product/${productId}`
-        );
-        setProduct(productRes.data.product);
 
-        // Check if product is in wishlist
-        const wishlistRes = await axios.get("http://localhost:3000/api/v1/wishlist");
-        const userWishlistProducts = wishlistRes.data.userWishlist?.products || [];
-        const productIsInWishlist = userWishlistProducts.some(
-          (item) => item._id === productId
-        );
-        setIsInWishlist(productIsInWishlist);
+       const productRes = await axios.get(
+         `http://localhost:3000/api/v1/product/${productId}`
+       );
+       setProduct(productRes.data.product);
 
-      } catch (err) {
+       try {
+         const wishlistRes = await axios.get(
+           "http://localhost:3000/api/v1/wishlist",
+           {
+             withCredentials: true,
+           }
+         );
+         const userWishlistProducts =
+           wishlistRes.data.userWishlist?.products || [];
+         const productIsInWishlist = userWishlistProducts.some(
+           (item) => item._id === productId
+         );
+         setIsInWishlist(productIsInWishlist);
+       } catch (wishlistErr) {
+         setIsInWishlist(false);
+       }
+
+      } 
+      catch (err) {
         console.error("Error fetching product details or wishlist status:", err);
         setError("Failed to load product details. Please try again.");
         toast.error("Failed to load product details."); // Toast for fetch error
-      } finally {
+      } 
+      finally {
         setLoading(false);
       }
     };
