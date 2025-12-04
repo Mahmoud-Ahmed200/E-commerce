@@ -139,7 +139,7 @@ function Navbar({ user, setUser }) {
                 >
                   <i className="bi bi-cart3 fs-5"></i>
                   {cartCount > 0 && (
-                    <span className="cart-badge text-bg-dark">{cartCount}</span>
+                    <span className="cart-badge">{cartCount}</span>
                   )}
                 </Link>
               </div>
