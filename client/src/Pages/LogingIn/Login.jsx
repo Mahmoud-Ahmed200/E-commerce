@@ -89,9 +89,6 @@ function Login({ setUser }) {
               <input className="form-check-input" type="checkbox" />
               <label className="mx-2">Remember me </label>
             </div>
-            <Link className="text-decoration-none blue-sign" to={"/ForgetPassword"}>
-              Forgot password?
-            </Link>
           </div>
           <button type="submit" className="button-submit">Log In</button>
           <p className="p">
@@ -100,10 +97,7 @@ function Login({ setUser }) {
               Sign Up
             </Link>
           </p>
-          <p className="p line">Or With</p>
-
-          <div className="flex-column">
-          </div>
+          
         </form>
       </div>
     </>
