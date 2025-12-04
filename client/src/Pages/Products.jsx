@@ -17,7 +17,7 @@ function Products() {
     category: searchParams.get("category") || "",
     minPrice: searchParams.get("minPrice") || "",
     maxPrice: searchParams.get("maxPrice") || "",
-    sortBy: searchParams.get("sortBy") || "newest",
+    sortBy: searchParams.get("sortBy") || "",
     page: parseInt(searchParams.get("page")) || 1,
     limit: 12,
   });
@@ -45,8 +45,7 @@ function Products() {
     if (filters.category) params.set("category", filters.category);
     if (filters.minPrice) params.set("minPrice", filters.minPrice);
     if (filters.maxPrice) params.set("maxPrice", filters.maxPrice);
-    if (filters.sortBy && filters.sortBy !== "newest")
-      params.set("sortBy", filters.sortBy);
+    if (filters.sortBy) params.set("sortBy", filters.sortBy);
     if (filters.page > 1) params.set("page", filters.page);
     if (search) params.set("search", search);
     setSearchParams(params);
@@ -56,7 +55,7 @@ function Products() {
     const category = searchParams.get("category") || "";
     const minPrice = searchParams.get("minPrice") || "";
     const maxPrice = searchParams.get("maxPrice") || "";
-    const sortBy = searchParams.get("sortBy") || "newest";
+    const sortBy = searchParams.get("sortBy") || "";
     const page = parseInt(searchParams.get("page")) || 1;
 
     setFilters((prev) => ({
@@ -134,7 +133,7 @@ function Products() {
       }
       window.dispatchEvent(new Event("wishlistUpdated"));
     } catch {
-      alert("Please log in to use wishlist.");
+      toast.error("Please log in to add to wishlist.");
     }
   };
 
@@ -345,7 +344,7 @@ function Products() {
               value={filters.sortBy}
               onChange={handleSortChange}
             >
-              <option value="newest">Newest First</option>
+              <option value="">None</option>
               <option value="price-asc">Price: Low to High</option>
               <option value="price-desc">Price: High to Low</option>
               <option value="name-asc">Name: A to Z</option>
