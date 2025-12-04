@@ -250,7 +250,7 @@ function CheckoutPage() {
           <div className="amazon-box p-4">
             <h4 className="mb-3">Payment Method</h4>
 
-            {["card", "paypal", "cash"].map((method, i) => (
+            {["cash"].map((method, i) => (
               <div key={i} className="form-check mb-2">
                 <input
                   className="form-check-input"
