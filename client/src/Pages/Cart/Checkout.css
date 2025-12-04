@@ -1,0 +1,27 @@
+.amazon-box {
+  border: 1px solid #ddd;
+  background: #fff;
+  border-radius: 6px;
+}
+
+.amazon-box h4 {
+  color: #111;
+  font-weight: 600;
+}
+
+body {
+  background-color: #E8E8E8 !important;
+}
+
+img {
+  object-fit: cover;
+}
+
+.btn-placeorder {
+  background-color: #751FFE !important;
+  border-radius: 20px !important;
+}
+
+.btn-placeorder:hover {
+  background-color: #750fbe !important;
+}
