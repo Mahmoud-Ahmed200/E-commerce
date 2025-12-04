@@ -20,18 +20,24 @@ const buildProductFilter = (query) => {
   return filter;
 };
 
-const buildSortOptions = (sortBy) => {
-  const sortOptions = {
-    newest: { createdAt: -1 },
-    'price-low-high': { price: 1 },
-    'price-high-low': { price: -1 },
-    'name-az': { name: 1 },
-    'name-za': { name: -1 },
-    recommended: { averageRating: -1, totalReviews: -1 }
-  };
-  
-  return sortOptions[sortBy] || sortOptions.newest;
-};
+function buildSortOptions(sortBy) {
+  switch (sortBy) {
+    case "price-asc":
+      return { price: 1 };
+
+    case "price-desc":
+      return { price: -1 };
+
+    case "name-asc":
+      return { name: 1 };
+
+    case "name-desc":
+      return { name: -1 };
+
+    default:
+      return {};
+  }
+}
 
 module.exports = {
   buildProductFilter,
