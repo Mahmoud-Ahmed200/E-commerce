@@ -12,13 +12,6 @@ function Sidebar() {
         <i className="bi bi-person"></i>
       </NavLink>
       <NavLink
-        to="/MyOrders"
-        className="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
-      >
-        <span>My Orders</span>
-        <i className="bi bi-box-seam"></i>
-      </NavLink>
-      <NavLink
         to="/MyWishlist"
         className="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
       >
