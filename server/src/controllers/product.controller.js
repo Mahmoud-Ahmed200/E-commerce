@@ -3,7 +3,7 @@ const { buildProductFilter, buildSortOptions } = require("../utils/product");
 
 const getProductsByFilter = async (req, res) => {
   try {
-    const { page = 1, limit = 12, sortBy = "newest" } = req.query;
+    const { page = 1, limit = 12, sortBy = ""} = req.query;
 
     const filter = buildProductFilter(req.query);
     const sort = buildSortOptions(sortBy);
@@ -11,7 +11,7 @@ const getProductsByFilter = async (req, res) => {
     const skip = (page - 1) * limit;
 
     const [Products, total] = await Promise.all([
-      products.find(filter).sort(sort).limit(Number(limit)).skip(skip),
+      products.find(filter).collation({ locale: "en", strength: 1 }).sort(sort).limit(Number(limit)).skip(skip),
       products.countDocuments(filter),
     ]);
 
