@@ -252,6 +252,13 @@ a{
   transition: transform 0.2s;
 }
 
+.card-title {
+  font-size: 1rem;       
+  white-space: nowrap;   
+  overflow: hidden;       
+  text-overflow: ellipsis; 
+}
+
 
 .card-img {
   aspect-ratio: 1;
