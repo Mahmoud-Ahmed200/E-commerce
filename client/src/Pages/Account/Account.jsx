@@ -25,13 +25,15 @@ const Account = ({ user: userProp, setUser: setUserProp }) => {
     const fetchProfile = async () => {
       try {
         const res = await axios.get('http://localhost:3000/api/v1/user/profile');
-        console.log('Profile data:', res.data);
+
         setUser(res.data.user);
         setFullName(res.data.user.fullName);
+
         if (setUserProp) {
           setUserProp(res.data.user);
         }
-      } catch (error) {
+      } 
+      catch (error) {
         console.error('Failed to fetch profile:', error.response?.data?.message || error.message);
       }
     };
@@ -56,7 +58,8 @@ const Account = ({ user: userProp, setUser: setUserProp }) => {
         setUserProp(res.data.user);
       }
       setInfoNotify({ message: 'Profile updated successfully!', type: 'success' });
-    } catch (error) {
+    } 
+    catch (error) {
       const message = error.response?.data?.message || 'An error occurred.';
       setInfoNotify({ message: message, type: 'error' });
     }
@@ -70,7 +73,8 @@ const Account = ({ user: userProp, setUser: setUserProp }) => {
       const res = await axios.patch('http://localhost:3000/api/v1/user/changePassword', passwords);
       setPassNotify({ message: res.data.message, type: 'success' });
       setPasswords({ oldPassword: '', newPassword: '', newPasswordConfirmation: '' });
-    } catch (error) {
+    } 
+    catch (error) {
       const message = error.response?.data?.message || 'An error occurred.';
       setPassNotify({ message: message, type: 'error' });
     }
@@ -86,10 +90,10 @@ const Account = ({ user: userProp, setUser: setUserProp }) => {
 
     try {
       const res = await axios.post('http://localhost:3000/api/v1/user/profile-photo', formData);
-      console.log('Photo upload response:', res.data);
       
       const updatedUser = { ...user, profilePhoto: res.data.profilePhoto };
       setUser(updatedUser);
+
       if (setUserProp) {
         setUserProp(updatedUser);
       }
@@ -98,7 +102,8 @@ const Account = ({ user: userProp, setUser: setUserProp }) => {
       if (fileInputRef.current) {
         fileInputRef.current.value = '';
       }
-    } catch (error) {
+    } 
+    catch (error) {
       const message = error.response?.data?.message || 'An error occurred.';
       setPhotoNotify({ message: message, type: 'error' });
     }
@@ -116,7 +121,8 @@ const Account = ({ user: userProp, setUser: setUserProp }) => {
         setUserProp(updatedUser);
       }
       setPhotoNotify({ message: res.data.message, type: 'success' });
-    } catch (error) {
+    } 
+    catch (error) {
       const message = error.response?.data?.message || 'An error occurred.';
       setPhotoNotify({ message: message, type: 'error' });
     }
