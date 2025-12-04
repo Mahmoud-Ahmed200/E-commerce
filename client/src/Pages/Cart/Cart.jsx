@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import HelpSection from "./Help.jsx";
 import "./Cart.css";
+import Swal from "sweetalert2";
 
 axios.defaults.withCredentials = true;
 
@@ -70,18 +71,36 @@ function CartPage() {
 
 
   const handleClearCart = async () => {
-    if (!window.confirm("Are you sure you want to clear your cart?")) return;
-    try {
-      setProcessing(true);
-      await axios.delete("http://localhost:3000/api/v1/cart");
-      setCart({ items: [] });
-      setCartTotal(0);
-      window.dispatchEvent(new Event("cartUpdated"));
-    } catch (error) {
-      console.error("Error clearing cart:", error);
-    } finally {
-      setProcessing(false);
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "Do you really want to clear your cart?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, clear it!",
+      cancelButtonText: "No, keep it",
+      reverseButtons: true,
+    });
+
+    if (result.isConfirmed) {
+      try {
+        setProcessing(true);
+        await axios.delete("http://localhost:3000/api/v1/cart");
+        setCart({ items: [] });
+        setCartTotal(0);
+        window.dispatchEvent(new Event("cartUpdated"));
+        Swal.fire("Cleared!", "Your cart has been cleared.", "success");
+      } catch (error) {
+        console.error("Error clearing cart:", error);
+        Swal.fire("Error", "Failed to clear cart. Please try again.", "error");
+      } finally {
+        setProcessing(false);
+      }
     }
+  };
+
+  // Navigate to checkout page
+  const handleCheckout = () => {
+    window.location.href = "/checkout";
   };
 
   if (loading) {
@@ -237,7 +256,7 @@ function CartPage() {
                 <button
                   className="btn btn-lg btn-checkout w-100 text-white"
                   disabled={processing}
-                  onClick={() => alert("Proceeding to checkout...")}
+                  onClick={handleCheckout}
                 >
                   Checkout
                 </button>
