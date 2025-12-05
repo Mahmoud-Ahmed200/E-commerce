@@ -45,9 +45,17 @@ function Navbar({ user, setUser }) {
     }
   };
 
+  // Update cart count when user changes and on component mount
   useEffect(() => {
-    fetchCartCount();
+    if (user) {
+      fetchCartCount();
+    } else {
+      setCartCount(0);
+    }
+  }, [user]);
 
+  // Set up event listener for cart updates
+  useEffect(() => {
     const handleCartUpdate = () => fetchCartCount();
     window.addEventListener("cartUpdated", handleCartUpdate);
 
@@ -56,19 +64,23 @@ function Navbar({ user, setUser }) {
     };
   }, []);
 
+  // Poll for cart updates every 30 seconds as a fallback
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (user) {
+        fetchCartCount();
+      }
+    }, 30000);
+
+    return () => clearInterval(interval);
+  }, [user]);
+
   return (
     <div className="navbarmixed position-sticky top-0 w-100 z-3">
       <nav className="navbar navbar-expand-lg bg-body-tertiary py-3">
         <div className="container">
           <div className="brand">
             <Link className="navbar-brand" to="/">
-              {/* <img
-                src={logo}
-                alt="Logo"
-                width="50"
-                height="50"
-                className="d-inline-block align-text-center rounded-4"
-              /> */}
               Modern Tech
             </Link>
           </div>
@@ -86,10 +98,7 @@ function Navbar({ user, setUser }) {
               <span className="navbar-toggler-icon"></span>
             </button>
 
-            <div
-              className="collapse navbar-collapse"
-              id="navbarSupportedContent"
-            >
+            <div className="collapse navbar-collapse" id="navbarSupportedContent">
               <div className="d-flex align-items-center gap-4 icon-section">
                 {user ? (
                   <>
@@ -133,42 +142,32 @@ function Navbar({ user, setUser }) {
                   <i className="bi bi-heart fs-5"></i>
                 </Link>
 
-                <Link
-                  to="/Cart"
-                  className="position-relative text-dark navbar-icons"
-                >
+                <Link to="/Cart" className="position-relative text-dark navbar-icons">
                   <i className="bi bi-cart3 fs-5"></i>
-                  {cartCount > 0 && (
-                    <span className="cart-badge">{cartCount}</span>
-                  )}
+                  {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
                 </Link>
               </div>
 
-              
               <SearchBar />
 
               <div className="d-block d-lg-none">
                 <nav className="navbar2">
                   <ul className="nav flex-column">
-                    {["Mobile", "Laptop", "Tablet", "Computer", "TV"].map(
-                      (cat) => (
-                        <li key={cat} className="nav-item">
-                          <button
-                            onClick={() => handleCategoryClick(cat)}
-                            className="nav-link text-black bg-transparent border-0 text-start"
-                          >
-                            {cat}s
-                          </button>
-                        </li>
-                      )
-                    )}
+                    {["Mobile", "Laptop", "Tablet", "Computer", "TV"].map((cat) => (
+                      <li key={cat} className="nav-item">
+                        <button
+                          onClick={() => handleCategoryClick(cat)}
+                          className="nav-link text-black bg-transparent border-0 text-start"
+                        >
+                          {cat}s
+                        </button>
+                      </li>
+                    ))}
                     <li className="nav-item">
                       <NavLink
                         to="/about"
                         className={({ isActive }) =>
-                          isActive
-                            ? "nav-link text-black active"
-                            : "nav-link text-black"
+                          isActive ? "nav-link text-black active" : "nav-link text-black"
                         }
                       >
                         About
@@ -178,9 +177,7 @@ function Navbar({ user, setUser }) {
                       <NavLink
                         to="/contact"
                         className={({ isActive }) =>
-                          isActive
-                            ? "nav-link text-black active"
-                            : "nav-link text-black"
+                          isActive ? "nav-link text-black active" : "nav-link text-black"
                         }
                       >
                         Contact
